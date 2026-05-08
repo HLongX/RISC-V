@@ -10,7 +10,7 @@ z2
 cModel Technology
 dC:/intelFPGA/20.1
 vALU
-Z0 !s110 1776342311
+Z0 !s110 1778169423
 !i10b 1
 !s100 hWnCejW[Wg1mPlEEzWY660
 Z1 !s11b Dg1SIo80bB@j0V0VzS_@n1
@@ -20,20 +20,20 @@ Z3 dD:/RISC-V/sim
 w1776240846
 8../rtl/alu.v
 F../rtl/alu.v
-!i122 37
+!i122 43
 Z4 L0 1 27
 Z5 OV;L;2020.1;71
 r1
 !s85 0
 31
-Z6 !s108 1776342311.000000
+Z6 !s108 1778169423.000000
 Z7 !s107 ../rtl/top_level_pipeline.v|../rtl/top_level.v|../rtl/register_file.v|../rtl/pc.v|../rtl/mem_wb.v|../rtl/instruction_memory.v|../rtl/imm_gen.v|../rtl/if_id.v|../rtl/id_ex.v|../rtl/hazard_unit.v|../rtl/ex_mem.v|../rtl/dmem.v|../rtl/control_unit.v|../rtl/branch_comp.v|../rtl/alu.v|
 Z8 !s90 -reportprogress|300|../rtl/alu.v|../rtl/branch_comp.v|../rtl/control_unit.v|../rtl/dmem.v|../rtl/ex_mem.v|../rtl/hazard_unit.v|../rtl/id_ex.v|../rtl/if_id.v|../rtl/imm_gen.v|../rtl/instruction_memory.v|../rtl/mem_wb.v|../rtl/pc.v|../rtl/register_file.v|../rtl/top_level.v|../rtl/top_level_pipeline.v|
 !i113 1
 Z9 tCvgOpt 0
 n@a@l@u
 vALU_tb
-Z10 !s110 1776342317
+Z10 !s110 1778169411
 !i10b 1
 !s100 959Nj<@aQ1cU7FE:?TVMf3
 R1
@@ -43,13 +43,13 @@ R3
 w1776071438
 8../tb/alu_tb.v
 F../tb/alu_tb.v
-!i122 38
+!i122 42
 L0 3 68
 R5
 r1
 !s85 0
 31
-Z11 !s108 1776342317.000000
+Z11 !s108 1778169411.000000
 Z12 !s107 ../tb/top_level_tb.v|../tb/tb_pipeline.v|../tb/register_file_tb.v|../tb/pc_tb.v|../tb/instruction_memory_tb.v|../tb/imm_gen_tb.v|../tb/dmem_tb.v|../tb/control_unit_tb.v|../tb/branch_comp_tb.v|../tb/alu_tb.v|
 Z13 !s90 -reportprogress|300|../tb/alu_tb.v|../tb/branch_comp_tb.v|../tb/control_unit_tb.v|../tb/dmem_tb.v|../tb/imm_gen_tb.v|../tb/instruction_memory_tb.v|../tb/pc_tb.v|../tb/register_file_tb.v|../tb/tb_pipeline.v|../tb/top_level_tb.v|
 !i113 1
@@ -66,8 +66,8 @@ R3
 w1776153821
 8../rtl/branch_comp.v
 F../rtl/branch_comp.v
-!i122 37
-Z14 L0 1 24
+!i122 43
+L0 1 24
 R5
 r1
 !s85 0
@@ -89,8 +89,8 @@ R3
 w1776158431
 8../tb/branch_comp_tb.v
 F../tb/branch_comp_tb.v
-!i122 38
-Z15 L0 3 33
+!i122 42
+Z14 L0 3 33
 R5
 r1
 !s85 0
@@ -111,7 +111,7 @@ R3
 w1776158421
 8../tb/control_unit_tb.v
 F../tb/control_unit_tb.v
-!i122 38
+!i122 42
 L0 3 57
 R5
 r1
@@ -122,19 +122,41 @@ R12
 R13
 !i113 1
 R9
+vcontrol_unit
+R0
+!i10b 1
+!s100 n3XkiRkSfZTE8iB[6KhBZ0
+R1
+Ic[7Wl;bdGdDnd15?0LLmO2
+R2
+R3
+Z15 w1778165146
+Z16 8../rtl/control_unit.v
+Z17 F../rtl/control_unit.v
+!i122 43
+L0 2 123
+R5
+r1
+!s85 0
+31
+R6
+R7
+R8
+!i113 1
+R9
 vControlUnit
 R0
 !i10b 1
-!s100 jNm;?Hc[RQgjoJfCK1l6=1
+!s100 UYJGMRB?2:LV:NW5HKCf03
 R1
-IF4OjOAPCjS;mo067d[nL63
+IJ76]Kk8Sj15bWB]iXTJ?B2
 R2
 R3
-w1776340399
-8../rtl/control_unit.v
-F../rtl/control_unit.v
-!i122 37
-L0 1 129
+R15
+R16
+R17
+!i122 43
+L0 128 120
 R5
 r1
 !s85 0
@@ -156,7 +178,7 @@ R3
 w1776161677
 8../rtl/top_level.v
 F../rtl/top_level.v
-!i122 37
+!i122 43
 L0 1 113
 R5
 r1
@@ -169,7 +191,7 @@ R8
 R9
 n@c@p@u
 vCPU_pipeline
-Z16 !s110 1776340858
+Z18 !s110 1776340858
 !i10b 1
 !s100 IhYGFkW4KkaEgZZfn@H7W3
 R1
@@ -177,15 +199,15 @@ I83>maSTHaZ@]@^jP1[J[80
 R2
 R3
 w1776340843
-Z17 8../rtl/top_level_pipeline.v
-Z18 F../rtl/top_level_pipeline.v
+Z19 8../rtl/top_level_pipeline.v
+Z20 F../rtl/top_level_pipeline.v
 !i122 33
 L0 1 275
 R5
 r1
 !s85 0
 31
-Z19 !s108 1776340858.000000
+Z21 !s108 1776340858.000000
 R7
 R8
 !i113 1
@@ -202,7 +224,7 @@ R3
 w1776241953
 8../tb/top_level_tb.v
 F../tb/top_level_tb.v
-!i122 38
+!i122 42
 L0 3 67
 R5
 r1
@@ -224,7 +246,7 @@ R3
 w1776153820
 8../rtl/dmem.v
 F../rtl/dmem.v
-!i122 37
+!i122 43
 L0 1 22
 R5
 r1
@@ -247,7 +269,7 @@ R3
 w1776158443
 8../tb/dmem_tb.v
 F../tb/dmem_tb.v
-!i122 38
+!i122 42
 L0 3 49
 R5
 r1
@@ -258,19 +280,19 @@ R12
 R13
 !i113 1
 R9
-vEX_MEM
+vex_mem
 R0
 !i10b 1
-!s100 jTMPE49aekK:kJm590I[W3
+!s100 ciK`IR1BaAi:`Y2@;Qa0J1
 R1
-Ie3MREk8a^kPZ5ElSjOWEO1
+ITAdUhEhBi?YY5BYmRPZfj2
 R2
 R3
-w1776334513
-8../rtl/ex_mem.v
-F../rtl/ex_mem.v
-!i122 37
-L0 1 42
+w1778169004
+Z22 8../rtl/ex_mem.v
+Z23 F../rtl/ex_mem.v
+!i122 43
+L0 1 44
 R5
 r1
 !s85 0
@@ -280,20 +302,64 @@ R7
 R8
 !i113 1
 R9
+vEX_MEM
+Z24 !s110 1776342311
+!i10b 1
+!s100 jTMPE49aekK:kJm590I[W3
+R1
+Ie3MREk8a^kPZ5ElSjOWEO1
+R2
+R3
+w1776334513
+R22
+R23
+!i122 37
+L0 1 42
+R5
+r1
+!s85 0
+31
+Z25 !s108 1776342311.000000
+R7
+R8
+!i113 1
+R9
 n@e@x_@m@e@m
 vhazard_unit
 R0
 !i10b 1
-!s100 P2@YaolZTHd@Blh31h[9X1
+!s100 KDQiG53a;gBa9B2[ZAlD12
 R1
-IKmF9?JW2CL4NWE]zXHh4Z3
+IHC;RACXB_U<2<bC0icnal2
 R2
 R3
-w1776342044
+w1778165190
 8../rtl/hazard_unit.v
 F../rtl/hazard_unit.v
-!i122 37
-Z20 L0 1 21
+!i122 43
+L0 6 27
+R5
+r1
+!s85 0
+31
+R6
+R7
+R8
+!i113 1
+R9
+vid_ex
+R0
+!i10b 1
+!s100 Tb1S3G7;H<2?6L5XJaQB60
+R1
+ITa_kYVmcg7HO1gbEUUmln0
+R2
+R3
+w1778168997
+Z26 8../rtl/id_ex.v
+Z27 F../rtl/id_ex.v
+!i122 43
+L0 3 98
 R5
 r1
 !s85 0
@@ -304,7 +370,7 @@ R8
 !i113 1
 R9
 vID_EX
-R16
+R18
 !i10b 1
 !s100 M>iZenYDL@DZM6[a^[MQ[3
 R1
@@ -312,42 +378,20 @@ ITCFBmc31kCXAoRYiOSDJE0
 R2
 R3
 w1776334493
-Z21 8../rtl/id_ex.v
-Z22 F../rtl/id_ex.v
+R26
+R27
 !i122 33
 L0 1 67
 R5
 r1
 !s85 0
 31
-R19
+R21
 R7
 R8
 !i113 1
 R9
 n@i@d_@e@x
-vid_ex
-R0
-!i10b 1
-!s100 aM1[Z7RZ0JL8hn29945]E0
-R1
-ITgk[fjQcGUnl8F1X;a17l1
-R2
-R3
-w1776342058
-R21
-R22
-!i122 37
-L0 1 31
-R5
-r1
-!s85 0
-31
-R6
-R7
-R8
-!i113 1
-R9
 vIF
 !s110 1776092505
 !i10b 1
@@ -371,42 +415,19 @@ r1
 !i113 1
 R9
 n@i@f
-vIF_ID
-R16
-!i10b 1
-!s100 ?z9OGXUjL2@52>lBAb^1o3
-R1
-Ii>oO^RlUEGcfnTd10k>lQ0
-R2
-R3
-w1776334472
-Z23 8../rtl/if_id.v
-Z24 F../rtl/if_id.v
-!i122 33
-L0 1 18
-R5
-r1
-!s85 0
-31
-R19
-R7
-R8
-!i113 1
-R9
-n@i@f_@i@d
 vif_id
 R0
 !i10b 1
-!s100 IzQbS9fWO`5L;R7l2bh^M0
+!s100 69<7@jYFjLVB1`]GV]WMT2
 R1
-IC9GbPPOWgdED2oCiKz5Dz2
+Ic5Mmzd8i;WeFgkKDlKfZ>3
 R2
 R3
-w1776342074
-R23
-R24
-!i122 37
-R14
+w1778168983
+Z28 8../rtl/if_id.v
+Z29 F../rtl/if_id.v
+!i122 43
+L0 1 32
 R5
 r1
 !s85 0
@@ -416,6 +437,29 @@ R7
 R8
 !i113 1
 R9
+vIF_ID
+R18
+!i10b 1
+!s100 ?z9OGXUjL2@52>lBAb^1o3
+R1
+Ii>oO^RlUEGcfnTd10k>lQ0
+R2
+R3
+w1776334472
+R28
+R29
+!i122 33
+L0 1 18
+R5
+r1
+!s85 0
+31
+R21
+R7
+R8
+!i113 1
+R9
+n@i@f_@i@d
 vif_tb
 !s110 1776092509
 !i10b 1
@@ -428,7 +472,7 @@ w1776092476
 8../tb/if_tb.v
 F../tb/if_tb.v
 !i122 10
-R15
+R14
 R5
 r1
 !s85 0
@@ -449,7 +493,7 @@ R3
 w1776242690
 8../rtl/instruction_memory.v
 F../rtl/instruction_memory.v
-!i122 37
+!i122 43
 L0 1 11
 R5
 r1
@@ -472,7 +516,7 @@ R3
 w1776242746
 8../tb/instruction_memory_tb.v
 F../tb/instruction_memory_tb.v
-!i122 38
+!i122 42
 L0 3 29
 R5
 r1
@@ -494,7 +538,7 @@ R3
 w1776152931
 8../rtl/imm_gen.v
 F../rtl/imm_gen.v
-!i122 37
+!i122 43
 L0 1 46
 R5
 r1
@@ -517,7 +561,7 @@ R3
 w1776158408
 8../tb/imm_gen_tb.v
 F../tb/imm_gen_tb.v
-!i122 38
+!i122 42
 L0 3 41
 R5
 r1
@@ -528,8 +572,30 @@ R12
 R13
 !i113 1
 R9
-vMEM_WB
+vmem_wb
 R0
+!i10b 1
+!s100 IzloO9@_bFoC1nD086zj90
+R1
+IJlKKelK7YV44VFzN<C5080
+R2
+R3
+w1778169011
+Z30 8../rtl/mem_wb.v
+Z31 F../rtl/mem_wb.v
+!i122 43
+L0 1 40
+R5
+r1
+!s85 0
+31
+R6
+R7
+R8
+!i113 1
+R9
+vMEM_WB
+R24
 !i10b 1
 !s100 1[4=0E;AO8e0NlBhAWSMI3
 R1
@@ -537,15 +603,15 @@ IPok?[[MEm:ZHaOeakB^i21
 R2
 R3
 w1776334527
-8../rtl/mem_wb.v
-F../rtl/mem_wb.v
+R30
+R31
 !i122 37
 L0 1 38
 R5
 r1
 !s85 0
 31
-R6
+R25
 R7
 R8
 !i113 1
@@ -562,7 +628,7 @@ R3
 w1776333996
 8../rtl/pc.v
 F../rtl/pc.v
-!i122 37
+!i122 43
 L0 1 15
 R5
 r1
@@ -585,7 +651,7 @@ R3
 w1776090922
 8../tb/pc_tb.v
 F../tb/pc_tb.v
-!i122 38
+!i122 42
 L0 3 30
 R5
 r1
@@ -599,16 +665,16 @@ R9
 vpipeline_tb
 R10
 !i10b 1
-!s100 C46h_[@Fbe@81Hd;OhRGI3
+!s100 WT^Y[4EJnUk^NBCziBV2O1
 R1
-I_^8K9Y70b^[EPbNd=NV]<1
+I33:XnQl_hYPfCbG;0<0OP1
 R2
 R3
-w1776342242
-Z25 8../tb/tb_pipeline.v
-Z26 F../tb/tb_pipeline.v
-!i122 38
-L0 3 73
+w1778168239
+Z32 8../tb/tb_pipeline.v
+Z33 F../tb/tb_pipeline.v
+!i122 42
+L0 3 78
 R5
 r1
 !s85 0
@@ -629,8 +695,8 @@ R3
 w1776065990
 8../rtl/register_file.v
 F../rtl/register_file.v
-!i122 37
-R20
+!i122 43
+L0 1 21
 R5
 r1
 !s85 0
@@ -652,7 +718,7 @@ R3
 w1776066242
 8../tb/register_file_tb.v
 F../tb/register_file_tb.v
-!i122 38
+!i122 42
 L0 3 53
 R5
 r1
@@ -672,8 +738,8 @@ INZNGiAC5[_f56PAejga:;0
 R2
 R3
 w1776341524
-R25
-R26
+R32
+R33
 !i122 36
 L0 3 55
 R5
@@ -688,16 +754,16 @@ R9
 vtop_level_pipeline
 R0
 !i10b 1
-!s100 aWOQfRFkHjdZ4[c8:JR<n1
+!s100 I3ZS2ckn693T?onUikZjz0
 R1
-I9X3IOoLG_]2kN]7MV25al2
+IRki0Wz1D:o^^i6dkC4ND[1
 R2
 R3
-w1776342151
-R17
-R18
-!i122 37
-L0 1 235
+w1778169038
+R19
+R20
+!i122 43
+L0 1 313
 R5
 r1
 !s85 0
