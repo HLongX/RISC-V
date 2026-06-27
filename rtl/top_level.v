@@ -7,7 +7,8 @@ module CPU (
 wire [31:0] pc, next_pc, pc_plus4;
 wire [31:0] instr;
 
-wire PCSel, RegWEn, BrUn, BSel, ASel, MemRW;
+wire PCSel, RegWEn, BrUn, BSel, MemRW;
+wire [1:0] ASel;
 wire [2:0] ImmSel;
 wire [3:0] ALUSel;
 wire [1:0] WBSel;
@@ -81,7 +82,9 @@ BranchComp bc (
 );
 
 // ================= ALU INPUT MUX =================
-assign alu_in1 = (ASel) ? pc : reg_rs1;
+assign alu_in1 = (ASel == 2'b01) ? pc   :
+                 (ASel == 2'b10) ? 32'b0 :
+                 reg_rs1;
 assign alu_in2 = (BSel) ? imm : reg_rs2;
 
 // ================= ALU =================
@@ -108,6 +111,8 @@ assign wb_data =
                        pc_plus4;
 
 // ================= NEXT PC =================
-assign next_pc = (PCSel) ? alu_out : pc_plus4;
+// JALR (opcode 7'b1100111): clear LSB per RISC-V spec.
+assign next_pc = PCSel ? (instr[6:0] == 7'b1100111 ? {alu_out[31:1], 1'b0} : alu_out)
+                       : pc_plus4;
 
 endmodule

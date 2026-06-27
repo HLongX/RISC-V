@@ -37,6 +37,11 @@ always @(*) begin
                    1'b0};
         end
 
+        // ========= U-TYPE (LUI / AUIPC) =========
+        3'b100: begin
+            imm = {instr[31:12], 12'b0};
+        end
+
         default: begin
             imm = 32'd0;
         end

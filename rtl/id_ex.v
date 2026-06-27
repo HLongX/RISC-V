@@ -1,5 +1,6 @@
 // ID/EX pipeline register.
 // On flush OR stall: inject NOP bubble (zero all control signals).
+// On stall only: data path registers are preserved (control signals zeroed).
 module id_ex (
     input clk,
     input rst,
@@ -12,7 +13,7 @@ module id_ex (
     input  [1:0] ResultSrc_in,
     input  [3:0] ALUControl_in,
     input        ALUSrc_in,
-    input        ASel_in,
+    input  [1:0] ASel_in,
     input        Branch_in,
     input        Jump_in,
     input        BrUn_in,
@@ -36,7 +37,7 @@ module id_ex (
     output reg  [1:0] ResultSrc_out,
     output reg  [3:0] ALUControl_out,
     output reg        ALUSrc_out,
-    output reg        ASel_out,
+    output reg  [1:0] ASel_out,
     output reg        Branch_out,
     output reg        Jump_out,
     output reg        BrUn_out,
@@ -56,7 +57,8 @@ module id_ex (
 );
 
 always @(posedge clk or posedge rst) begin
-    if (rst || flush || stall) begin
+    if (rst || flush) begin
+        // Full reset / flush: clear everything.
         RegWrite_out   <= 0;
         MemRW_out      <= 0;
         ResultSrc_out  <= 0;
@@ -75,6 +77,18 @@ always @(posedge clk or posedge rst) begin
         rs2_out        <= 0;
         rd_out         <= 0;
         funct3_out     <= 0;
+    end else if (stall) begin
+        // Stall: inject NOP bubble by zeroing control signals only.
+        // Data path values are irrelevant when control signals are 0.
+        RegWrite_out   <= 0;
+        MemRW_out      <= 0;
+        ResultSrc_out  <= 0;
+        ALUControl_out <= 0;
+        ALUSrc_out     <= 0;
+        ASel_out       <= 0;
+        Branch_out     <= 0;
+        Jump_out       <= 0;
+        BrUn_out       <= 0;
     end else begin
         RegWrite_out   <= RegWrite_in;
         MemRW_out      <= MemRW_in;

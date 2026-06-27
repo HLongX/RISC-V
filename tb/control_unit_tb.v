@@ -5,7 +5,8 @@ module control_tb;
 reg [31:0] instr;
 reg BrEq, BrLT;
 
-wire PCSel, RegWEn, BrUn, BSel, ASel, MemRW;
+wire PCSel, RegWEn, BrUn, BSel, MemRW;
+wire [1:0] ASel;
 wire [2:0] ImmSel;
 wire [3:0] ALUSel;
 wire [1:0] WBSel;

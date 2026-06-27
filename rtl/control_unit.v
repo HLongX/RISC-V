@@ -1,4 +1,5 @@
 // Pipeline control unit — no BrEq/BrLT inputs; branch decision deferred to EX stage.
+// ASel encoding: 2'b00 = rs1, 2'b01 = PC, 2'b10 = zero (for LUI)
 module control_unit (
     input [31:0] instr,
     output reg RegWrite,
@@ -6,7 +7,7 @@ module control_unit (
     output reg [1:0] ResultSrc,
     output reg [3:0] ALUControl,
     output reg ALUSrc,
-    output reg ASel,
+    output reg [1:0] ASel,
     output reg Branch,
     output reg Jump,
     output reg BrUn,
@@ -23,7 +24,7 @@ always @(*) begin
     ResultSrc  = 2'b00;
     ALUControl = 4'b0000;
     ALUSrc     = 0;
-    ASel       = 0;
+    ASel       = 2'b00;
     Branch     = 0;
     Jump       = 0;
     BrUn       = 0;
@@ -88,7 +89,7 @@ always @(*) begin
 
         // Branch
         7'b1100011: begin
-            ASel       = 1; // PC as ALU input A → target = PC + imm
+            ASel       = 2'b01; // PC as ALU input A → target = PC + imm
             ALUSrc     = 1;
             ALUControl = 4'b0000;
             Branch     = 1;
@@ -99,7 +100,7 @@ always @(*) begin
         // JAL
         7'b1101111: begin
             RegWrite   = 1;
-            ASel       = 1; // PC + imm
+            ASel       = 2'b01; // PC + imm
             ALUSrc     = 1;
             ALUControl = 4'b0000;
             ResultSrc  = 2'b10; // write PC+4 to rd
@@ -110,11 +111,32 @@ always @(*) begin
         // JALR
         7'b1100111: begin
             RegWrite   = 1;
-            ALUSrc     = 1; // rs1 + imm (ASel=0, rs1 as A)
+            ASel       = 2'b00; // rs1 + imm (clear LSB in top-level)
+            ALUSrc     = 1;
             ALUControl = 4'b0000;
             ResultSrc  = 2'b10;
             Jump       = 1;
             ImmSel     = 3'b000;
+        end
+
+        // LUI
+        7'b0110111: begin
+            RegWrite   = 1;
+            ASel       = 2'b10; // zero as ALU input A → result = 0 + U-imm
+            ALUSrc     = 1;
+            ALUControl = 4'b0000;
+            ResultSrc  = 2'b00;
+            ImmSel     = 3'b100;
+        end
+
+        // AUIPC
+        7'b0010111: begin
+            RegWrite   = 1;
+            ASel       = 2'b01; // PC + U-imm
+            ALUSrc     = 1;
+            ALUControl = 4'b0000;
+            ResultSrc  = 2'b00;
+            ImmSel     = 3'b100;
         end
 
         default: begin end
@@ -125,6 +147,7 @@ endmodule
 
 
 // Single-cycle control unit (used by top_level.v).
+// ASel encoding: 2'b00 = rs1, 2'b01 = PC, 2'b10 = zero (for LUI)
 module ControlUnit (
     input [31:0] instr,
     input BrEq,
@@ -135,10 +158,9 @@ module ControlUnit (
     output reg RegWEn,
     output reg BrUn,
     output reg BSel,
-    output reg ASel,
+    output reg [1:0] ASel,
     output reg [3:0] ALUSel,
     output reg MemRW,
-    output reg MemRead,
     output reg [1:0] WBSel
 );
 
@@ -151,10 +173,9 @@ always @(*) begin
     RegWEn  = 0;
     BrUn    = 0;
     BSel    = 0;
-    ASel    = 0;
+    ASel    = 2'b00;
     ALUSel  = 4'b0000;
     MemRW   = 0;
-    MemRead = 0;
     WBSel   = 2'b00;
     ImmSel  = 3'b000;
 
@@ -196,11 +217,10 @@ always @(*) begin
         end
 
         7'b0000011: begin
-            RegWEn  = 1;
-            BSel    = 1;
-            WBSel   = 2'b00;
-            ALUSel  = 4'b0000;
-            MemRead = 1;
+            RegWEn = 1;
+            BSel   = 1;
+            WBSel  = 2'b00;
+            ALUSel = 4'b0000;
         end
 
         7'b0100011: begin
@@ -211,7 +231,7 @@ always @(*) begin
         end
 
         7'b1100011: begin
-            ASel   = 1;
+            ASel   = 2'b01;
             BSel   = 1;
             ImmSel = 3'b010;
             case (funct3)
@@ -228,7 +248,7 @@ always @(*) begin
         7'b1101111: begin
             RegWEn = 1;
             PCSel  = 1;
-            ASel   = 1;
+            ASel   = 2'b01;
             BSel   = 1;
             ImmSel = 3'b011;
             WBSel  = 2'b10;
@@ -237,8 +257,27 @@ always @(*) begin
         7'b1100111: begin
             RegWEn = 1;
             PCSel  = 1;
+            ASel   = 2'b00; // rs1 + imm (LSB cleared in top_level)
             BSel   = 1;
             WBSel  = 2'b10;
+        end
+
+        // LUI
+        7'b0110111: begin
+            RegWEn = 1;
+            ASel   = 2'b10; // zero → result = 0 + U-imm
+            BSel   = 1;
+            ImmSel = 3'b100;
+            WBSel  = 2'b01;
+        end
+
+        // AUIPC
+        7'b0010111: begin
+            RegWEn = 1;
+            ASel   = 2'b01; // PC + U-imm
+            BSel   = 1;
+            ImmSel = 3'b100;
+            WBSel  = 2'b01;
         end
 
     endcase

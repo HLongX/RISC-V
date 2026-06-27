@@ -78,7 +78,8 @@ ImmGen ig (
 wire        RegWrite_ID, MemRW_ID;
 wire [1:0]  ResultSrc_ID;
 wire [3:0]  ALUControl_ID;
-wire        ALUSrc_ID, ASel_ID, Branch_ID, Jump_ID, BrUn_ID;
+wire        ALUSrc_ID, Branch_ID, Jump_ID, BrUn_ID;
+wire [1:0]  ASel_ID;
 
 control_unit cu (
     .instr(instr_ID),
@@ -100,7 +101,8 @@ control_unit cu (
 wire        RegWrite_EX, MemRW_EX;
 wire [1:0]  ResultSrc_EX;
 wire [3:0]  ALUControl_EX;
-wire        ALUSrc_EX, ASel_EX, Branch_EX, Jump_EX, BrUn_EX;
+wire        ALUSrc_EX, Branch_EX, Jump_EX, BrUn_EX;
+wire [1:0]  ASel_EX;
 wire [31:0] regA_EX, regB_EX, imm_EX, pc_EX, pc4_EX;
 wire [4:0]  rs1_EX, rs2_EX, rd_EX;
 wire [2:0]  funct3_EX;
@@ -159,7 +161,9 @@ id_ex idex (
 // ============================================================
 wire [31:0] alu_in1, alu_in2, alu_out_EX;
 
-assign alu_in1 = ASel_EX  ? pc_EX  : regA_EX;
+assign alu_in1 = (ASel_EX == 2'b01) ? pc_EX  :
+                 (ASel_EX == 2'b10) ? 32'b0  :
+                 regA_EX;
 assign alu_in2 = ALUSrc_EX ? imm_EX : regB_EX;
 
 ALU alu (
@@ -301,7 +305,10 @@ hazard_unit hz (
 // flush discards two wrong-path instructions (in IF/ID and ID/EX).
 // flush takes priority over stall so we jump even if ID is stalled.
 assign flush   = PCSel_EX;
-assign next_pc = PCSel_EX ? alu_out_EX : pc_plus4;
+// JALR (Jump=1, ASel=00 → rs1+imm) must clear LSB per RISC-V spec.
+// JAL  (Jump=1, ASel=01 → PC+imm) target is always 2-byte aligned (imm[0]=0).
+assign next_pc = PCSel_EX ? ((Jump_EX && ASel_EX == 2'b00) ? {alu_out_EX[31:1], 1'b0} : alu_out_EX)
+                           : pc_plus4;
 
 always @(posedge clk or posedge rst) begin
     if (rst)
